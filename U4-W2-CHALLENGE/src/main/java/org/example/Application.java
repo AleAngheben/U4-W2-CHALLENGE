@@ -23,7 +23,7 @@ public class Application {
         List<Elements> myCatalog = new ArrayList<>();
 
         //HO CREATO 5 LIBRI E 5 RIVISTE TRAMITE LA CLASSE CREATE
-        Create.createAndAdd(200, myCatalog);
+        Create.createAndAdd(5, myCatalog);
         System.out.println(myCatalog);
 
 
@@ -97,17 +97,19 @@ public class Application {
 
         System.out.println("");
         System.out.println("Esercizio 7");
-
-        try {
+        System.out.println("bene");
+     /*   try {
 
             String fileContent = readFromFile("src/main/java/org/example/files/text.txt");
-
+            System.out.println("bene");
             System.out.println("Contenuto del file:");
+            System.out.println("bene");
             System.out.println(fileContent);
-
+            System.out.println("bene");
         } catch (IOException e) {
             System.err.println("Errore durante la lettura del file: " + e.getMessage());
-        }
+        }*/
+    }
 
     //per la scrittura del file
     public static void writeListToFile(List<Elements> list, String filePath) throws IOException {
@@ -118,9 +120,10 @@ public class Application {
         FileUtils.writeStringToFile(new File(filePath), content.toString(), StandardCharsets.UTF_8);
     }
 
-    private static String readFroFile(String filePath) throws IOException{
-        return FileUtils.readFileToString(new File(filePath),"UTF_8");
+    private static String readFromFile(String filePath) throws IOException {
+        return FileUtils.readFileToString(new File(filePath), "UTF_8");
     }
-        
+
+
 
 }
