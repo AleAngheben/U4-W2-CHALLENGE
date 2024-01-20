@@ -2,7 +2,7 @@ package org.example.Elements.abstractClasses;
 
 import java.util.Random;
 
-public  class Elements {
+public abstract class Elements {
 
     private int codISBN;
 

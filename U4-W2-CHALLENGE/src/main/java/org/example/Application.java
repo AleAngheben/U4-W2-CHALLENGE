@@ -8,6 +8,7 @@ import org.example.actions.Create;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class Application {
 
@@ -63,5 +64,22 @@ public class Application {
 
         String authorToSearch = faker.book().author();
 
+        List<Elements> booksByAuthor = myCatalog.stream()
+                .filter(ele -> ele instanceof Book)
+                .map(ele -> (Book) ele)
+                .filter(book -> authorToSearch.equals(book.getAuthor()))
+                .collect(Collectors.toList());
+
+        if (booksByAuthor.isEmpty()) {
+            System.out.println("Nessun libro ha come autore " + authorToSearch);
+        }else {
+            System.out.println("I libri che hanno in comune l'autore " + authorToSearch + " sono :");
+            booksByAuthor.forEach(System.out::println);
+        }
+
+
+        //6 SALVATAGGIO SU DISCO ARCHIVIO
+
+        //7 CARICAMENTO DAL DISCO DELL'ARCHIVIO
     }
 }
