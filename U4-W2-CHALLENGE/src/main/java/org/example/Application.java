@@ -1,10 +1,14 @@
 package org.example;
 
 import com.github.javafaker.Faker;
+import org.apache.commons.io.FileUtils;
 import org.example.Elements.Book;
 import org.example.Elements.abstractClasses.Elements;
 import org.example.actions.Create;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -60,7 +64,7 @@ public class Application {
 
         // 5 RICERCA PER AUTORE
 
-        Faker faker  = new Faker(Locale.ITALY);
+        Faker faker = new Faker(Locale.ITALY);
 
         String authorToSearch = faker.book().author();
 
@@ -72,7 +76,7 @@ public class Application {
 
         if (booksByAuthor.isEmpty()) {
             System.out.println("Nessun libro ha come autore " + authorToSearch);
-        }else {
+        } else {
             System.out.println("I libri che hanno in comune l'autore " + authorToSearch + " sono :");
             booksByAuthor.forEach(System.out::println);
         }
@@ -80,6 +84,43 @@ public class Application {
 
         //6 SALVATAGGIO SU DISCO ARCHIVIO
 
+        System.out.println("");
+        System.out.println("Esercizio 6");
+        try {
+            writeListToFile(myCatalog, "src/main/java/org/example/files/text.txt");
+        } catch (IOException e) {
+            System.err.println("Errore durante la scrittura nel file :" + e.getMessage());
+        }
+
+
         //7 CARICAMENTO DAL DISCO DELL'ARCHIVIO
+
+        System.out.println("");
+        System.out.println("Esercizio 7");
+
+        try {
+
+            String fileContent = readFromFile("src/main/java/org/example/files/text.txt");
+
+            System.out.println("Contenuto del file:");
+            System.out.println(fileContent);
+
+        } catch (IOException e) {
+            System.err.println("Errore durante la lettura del file: " + e.getMessage());
+        }
+
+    //per la scrittura del file
+    public static void writeListToFile(List<Elements> list, String filePath) throws IOException {
+        StringBuilder content = new StringBuilder();
+        for (Elements element : list) {
+            content.append(element.toString()).append(System.lineSeparator());
+        }
+        FileUtils.writeStringToFile(new File(filePath), content.toString(), StandardCharsets.UTF_8);
     }
+
+    private static String readFroFile(String filePath) throws IOException{
+        return FileUtils.readFileToString(new File(filePath),"UTF_8");
+    }
+        
+
 }
